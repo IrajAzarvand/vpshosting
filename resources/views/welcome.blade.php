@@ -238,7 +238,7 @@
                 <ul>
                     <li><i class="fas fa-map-marker-alt"></i> تهران، خیابان آزادی، دانشگاه شریف</li>
                     <li><i class="fas fa-phone"></i> 021-12345678</li>
-                    <li><i class="fas fa-envelope"></i> info@cloudservice.ir</li>
+                    <li><i class="fas fa-envelope"></i> iraj.azarvand@gmail.com</li>
                 </ul>
             </div>
         </div>
