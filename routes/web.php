@@ -13,6 +13,10 @@ Route::get('/', function () {
 //     return view('template');
 // });
 
+// Route::get('/about', function () {
+//     return view('about');
+// });
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

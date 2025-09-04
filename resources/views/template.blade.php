@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('description', 'سرویس های VPS حرفه ای - میزبانی ابری با عملکرد بالا')">
+    <meta name="description"
+        content="@yield('description', 'ارائه دهنده سرویس های VPS و هاستینگ حرفه ای با پشتیبانی 24/7 - میزبانی ابری با uptime 99.9%')">
     <title>@yield('title', 'سرویس های VPS حرفه ای - میزبانی ابری با عملکرد بالا')</title>
 
     <!-- External CSS -->
