@@ -18,7 +18,10 @@ return new class extends Migration
         $table->string('phone')->nullable();
         $table->string('subject');
         $table->text('message');
+        $table->boolean('is_human')->default(false);
         $table->boolean('is_read')->default(false);
+        $table->text('admin_response')->nullable();
+        $table->timestamp('responded_at')->nullable();
         $table->timestamps();
         });
     }

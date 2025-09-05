@@ -6,6 +6,7 @@ use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -35,5 +36,16 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/admin/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts.index');
 Route::delete('/admin/contacts/{contact}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
+
+// Admin contact management routes
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/contacts', [ContactController::class, 'adminIndex'])->name('contacts.index');
+    Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
+    Route::post('/contacts/{contact}/respond', [ContactController::class, 'respond'])->name('contacts.respond');
+    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+    Route::post('/contacts/bulk-action', [ContactController::class, 'bulkAction'])->name('contacts.bulk-action');
+    Route::patch('/admin/contacts/{contact}', [ContactController::class, 'update'])->name('admin.contacts.update');
+});
+
 
 require __DIR__.'/auth.php';

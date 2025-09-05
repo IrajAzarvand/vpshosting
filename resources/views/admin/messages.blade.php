@@ -608,7 +608,7 @@
                     <i class="fas fa-envelope"></i>
                 </div>
                 <div class="stat-content">
-                    <div class="stat-number">۴۸</div>
+                    <div class="stat-number">{{ $totalCount }}</div>
                     <div class="stat-label">کل پیام ها</div>
                 </div>
             </div>
@@ -617,7 +617,7 @@
                     <i class="fas fa-envelope-open"></i>
                 </div>
                 <div class="stat-content">
-                    <div class="stat-number">۳۲</div>
+                    <div class="stat-number">{{ $readCount }}</div>
                     <div class="stat-label">پیام های خوانده شده</div>
                 </div>
             </div>
@@ -626,7 +626,7 @@
                     <i class="fas fa-reply"></i>
                 </div>
                 <div class="stat-content">
-                    <div class="stat-number">۲۶</div>
+                    <div class="stat-number">{{ $repliedCount }}</div>
                     <div class="stat-label">پاسخ داده شده</div>
                 </div>
             </div>
@@ -635,7 +635,7 @@
                     <i class="fas fa-clock"></i>
                 </div>
                 <div class="stat-content">
-                    <div class="stat-number">۵</div>
+                    <div class="stat-number">{{ $newCount }}</div>
                     <div class="stat-label">پیام های جدید</div>
                 </div>
             </div>
@@ -646,10 +646,14 @@
             <div class="card-header">
                 <h2 class="card-title">لیست پیام ها</h2>
                 <div class="filters">
-                    <button class="filter-btn active">همه</button>
-                    <button class="filter-btn">جدید</button>
-                    <button class="filter-btn">خوانده شده</button>
-                    <button class="filter-btn">پاسخ داده شده</button>
+                    <a href="{{ route('admin.contacts.index', ['filter' => 'all']) }}"
+                        class="filter-btn {{ $filter == 'all' ? 'active' : '' }}">همه</a>
+                    <a href="{{ route('admin.contacts.index', ['filter' => 'new']) }}"
+                        class="filter-btn {{ $filter == 'new' ? 'active' : '' }}">جدید</a>
+                    <a href="{{ route('admin.contacts.index', ['filter' => 'read']) }}"
+                        class="filter-btn {{ $filter == 'read' ? 'active' : '' }}">خوانده شده</a>
+                    <a href="{{ route('admin.contacts.index', ['filter' => 'replied']) }}"
+                        class="filter-btn {{ $filter == 'replied' ? 'active' : '' }}">پاسخ داده شده</a>
                 </div>
             </div>
 
@@ -665,7 +669,7 @@
                             <th><i class="fas fa-cog"></i> عملیات</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {{-- <tbody>
                         <tr>
                             <td>محمد رضایی</td>
                             <td>mohammad@example.com</td>
@@ -726,6 +730,31 @@
                                 <button class="action-btn"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
+                    </tbody> --}}
+                    <tbody>
+                        @foreach($contacts as $contact)
+                        <tr>
+                            <td>{{ $contact->name }}</td>
+                            <td>{{ $contact->email }}</td>
+                            <td>{{ $contact->subject }}</td>
+                            <td>{{ jdate($contact->created_at)->format('Y/m/d') }}</td>
+                            <td>
+                                <span class="status status-{{ $contact->status_class }}">{{ $contact->status_text
+                                    }}</span>
+                            </td>
+                            <td>
+                                <button class="action-btn view-message" data-id="{{ $contact->id }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn reply-message" data-id="{{ $contact->id }}">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button class="action-btn delete-message" data-id="{{ $contact->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -742,7 +771,7 @@
     </main>
 
     <!-- Message Detail Modal -->
-    <div class="modal" id="messageModal">
+    {{-- <div class="modal" id="messageModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">مشاهده پیام</h2>
@@ -777,6 +806,87 @@
                     بشم. هنگام اتصال خطای timeout می گیرم. لطفا راهنمایی کنید چگونه مشکل را حل کنم.</p>
             </div>
 
+            <!-- Response Display Section -->
+            @if(isset($contact) && $contact->admin_response)
+            <div class="message-response" style="display: block;">
+                <h3>پاسخ ارسال شده</h3>
+                <div class="response-content">
+                    <p id="modal-response">{{ $contact->admin_response }}</p>
+                    <div class="response-meta">
+                        <small>تاریخ پاسخ: {{ jdate($contact->responded_at)->format('Y/m/d H:i') }}</small>
+                    </div>
+                </div>
+            </div>
+            @else
+            <div class="message-response" style="display: none;">
+                <h3>پاسخ ارسال شده</h3>
+                <div class="response-content">
+                    <p id="modal-response"></p>
+                    <div class="response-meta">
+                        <small id="response-date"></small>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            <div class="response-form">
+                <h3>پاسخ به پیام</h3>
+                <textarea placeholder="متن پاسخ خود را اینجا بنویسید..."></textarea>
+                <div>
+                    <button class="btn btn-primary">ارسال پاسخ</button>
+                    <button class="btn btn-secondary">علامت به عنوان خوانده شده</button>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    <!-- Message Detail Modal -->
+    <div class="modal" id="messageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">مشاهده پیام</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+
+            <div class="message-details">
+                <div class="detail-row">
+                    <div class="detail-label">فرستنده:</div>
+                    <div class="detail-value" id="modal-name"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">ایمیل:</div>
+                    <div class="detail-value" id="modal-email"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">تلفن:</div>
+                    <div class="detail-value" id="modal-phone"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">تاریخ:</div>
+                    <div class="detail-value" id="modal-date"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">موضوع:</div>
+                    <div class="detail-value" id="modal-subject"></div>
+                </div>
+            </div>
+
+            <div class="message-content">
+                <p id="modal-message"></p>
+            </div>
+
+            <!-- Response Display Section -->
+            <div class="message-response" style="display: none;">
+                <h3>پاسخ ارسال شده</h3>
+                <div class="response-content">
+                    <p id="modal-response"></p>
+                    <div class="response-meta">
+                        <small id="response-date"></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Response Form Section -->
             <div class="response-form">
                 <h3>پاسخ به پیام</h3>
                 <textarea placeholder="متن پاسخ خود را اینجا بنویسید..."></textarea>
@@ -788,7 +898,8 @@
         </div>
     </div>
 
-    <script>
+
+    {{-- <script>
         // Modal functionality
         const modal = document.getElementById('messageModal');
         const closeModalBtn = document.querySelector('.close-modal');
@@ -828,7 +939,353 @@
                 // In a real application, you would filter the table based on the selected filter
             });
         });
+    </script> --}}
+
+    {{-- <script>
+        // CSRF token for AJAX requests
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        // View message details
+        document.querySelectorAll('.view-message').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const messageId = btn.getAttribute('data-id');
+
+                try {
+                    const response = await fetch(`/admin/contacts/${messageId}`);
+                    const contact = await response.json();
+
+                    // Populate modal with message data
+                    document.getElementById('modal-name').textContent = contact.name;
+                    document.getElementById('modal-email').textContent = contact.email;
+                    document.getElementById('modal-phone').textContent = contact.phone || 'ثبت نشده';
+                    document.getElementById('modal-date').textContent = new Date(contact.created_at).toLocaleString('fa-IR');
+                    document.getElementById('modal-subject').textContent = contact.subject;
+                    document.getElementById('modal-message').textContent = contact.message;
+
+                    // Show response section if needed
+                    const responseForm = document.querySelector('.response-form');
+                    if (contact.admin_response) {
+                        responseForm.style.display = 'none';
+                        document.querySelector('.message-response').style.display = 'block';
+                        document.getElementById('modal-response').textContent = contact.admin_response;
+                    } else {
+                        responseForm.style.display = 'block';
+                        document.querySelector('.message-response').style.display = 'none';
+                    }
+
+                    // Show modal
+                    document.getElementById('messageModal').style.display = 'block';
+
+                } catch (error) {
+                    console.error('Error fetching message:', error);
+                    alert('خطا در دریافت اطلاعات پیام');
+                }
+            });
+        });
+
+        // Send response
+        document.getElementById('responseForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const messageId = document.getElementById('responseForm').getAttribute('data-message-id');
+            const responseText = document.querySelector('#responseForm textarea').value;
+
+            try {
+                const response = await fetch(`/admin/contacts/${messageId}/respond`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({ response: responseText })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(result.message);
+                    document.getElementById('messageModal').style.display = 'none';
+                    location.reload(); // Refresh to update status
+                } else {
+                    alert('خطا در ارسال پاسخ');
+                }
+            } catch (error) {
+                console.error('Error sending response:', error);
+                alert('خطا در ارسال پاسخ');
+            }
+        });
+
+        // Delete message
+        document.querySelectorAll('.delete-message').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                if (!confirm('آیا از حذف این پیام اطمینان دارید؟')) return;
+
+                const messageId = btn.getAttribute('data-id');
+
+                try {
+                    const response = await fetch(`/admin/contacts/${messageId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        }
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert(result.message);
+                        btn.closest('tr').remove(); // Remove from table
+                    } else {
+                        alert('خطا در حذف پیام');
+                    }
+                } catch (error) {
+                    console.error('Error deleting message:', error);
+                    alert('خطا در حذف پیام');
+                }
+            });
+        });
+    </script> --}}
+
+
+    <script>
+        // CSRF token for AJAX requests
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        // Modal elements
+        const modal = document.getElementById('messageModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const viewMessageBtns = document.querySelectorAll('.view-message');
+        const responseForm = document.querySelector('.response-form');
+        const messageResponse = document.querySelector('.message-response');
+
+        // Store current message ID
+        let currentMessageId = null;
+
+        // View message details
+        viewMessageBtns.forEach(btn => {
+            btn.addEventListener('click', async () => {
+                currentMessageId = btn.getAttribute('data-id');
+
+                try {
+                    const response = await fetch(`/admin/contacts/${currentMessageId}`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const contact = await response.json();
+
+                    // Populate modal with message data
+                    document.getElementById('modal-name').textContent = contact.name;
+                    document.getElementById('modal-email').textContent = contact.email;
+                    document.getElementById('modal-phone').textContent = contact.phone || 'ثبت نشده';
+                    document.getElementById('modal-date').textContent = new Date(contact.created_at).toLocaleDateString('fa-IR');
+                    document.getElementById('modal-subject').textContent = contact.subject;
+                    document.getElementById('modal-message').textContent = contact.message;
+
+                    // Show response section if needed
+                    if (contact.admin_response) {
+                        messageResponse.style.display = 'block';
+                        responseForm.style.display = 'none';
+                        document.getElementById('modal-response').textContent = contact.admin_response;
+
+                        // Show response date if available
+                        if (contact.responded_at) {
+                            document.getElementById('response-date').textContent =
+                                `تاریخ پاسخ: ${new Date(contact.responded_at).toLocaleDateString('fa-IR')}`;
+                        }
+                    } else {
+                        messageResponse.style.display = 'none';
+                        responseForm.style.display = 'block';
+                        responseForm.querySelector('textarea').value = '';
+                    }
+
+                    // Show modal
+                    modal.style.display = 'block';
+
+                } catch (error) {
+                    console.error('Error fetching message:', error);
+                    alert('خطا در دریافت اطلاعات پیام');
+                }
+            });
+        });
+
+        // Close modal when close button is clicked
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            currentMessageId = null;
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                currentMessageId = null;
+            }
+        });
+
+        // Send response
+        document.querySelector('.response-form .btn-primary').addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            if (!currentMessageId) {
+                alert('خطا در شناسایی پیام');
+                return;
+            }
+
+            const responseText = document.querySelector('.response-form textarea').value.trim();
+
+            if (!responseText) {
+                alert('لطفا متن پاسخ را وارد کنید');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/admin/contacts/${currentMessageId}/respond`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({ response: responseText })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('پاسخ با موفقیت ارسال شد');
+
+                    // Update UI to show the response
+                    messageResponse.style.display = 'block';
+                    responseForm.style.display = 'none';
+                    document.getElementById('modal-response').textContent = responseText;
+                    document.getElementById('response-date').textContent =
+                        `تاریخ پاسخ: ${new Date().toLocaleDateString('fa-IR')}`;
+
+                    // Update the status in the table
+                    const statusCell = document.querySelector(`.view-message[data-id="${currentMessageId}"]`)
+                        .closest('tr')
+                        .querySelector('.status');
+
+                    statusCell.className = 'status status-replied';
+                    statusCell.textContent = 'پاسخ داده شده';
+
+                } else {
+                    alert('خطا در ارسال پاسخ');
+                }
+            } catch (error) {
+                console.error('Error sending response:', error);
+                alert('خطا در ارسال پاسخ');
+            }
+        });
+
+        // Mark as read button
+        document.querySelector('.response-form .btn-secondary').addEventListener('click', async () => {
+            if (!currentMessageId) return;
+
+            try {
+                // Send request to mark as read
+                const response = await fetch(`/admin/contacts/${currentMessageId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({ is_read: true })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('پیام به عنوان خوانده شده علامت گذاری شد');
+
+                    // Update the status in the table
+                    const statusCell = document.querySelector(`.view-message[data-id="${currentMessageId}"]`)
+                        .closest('tr')
+                        .querySelector('.status');
+
+                    if (statusCell.classList.contains('status-new')) {
+                        statusCell.className = 'status status-read';
+                        statusCell.textContent = 'خوانده شده';
+                    }
+
+                } else {
+                    alert('خطا در به روز رسانی وضعیت پیام');
+                }
+            } catch (error) {
+                console.error('Error marking as read:', error);
+                alert('خطا در به روز رسانی وضعیت پیام');
+            }
+        });
+
+        // Delete message
+        document.querySelectorAll('.delete-message').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                if (!confirm('آیا از حذف این پیام اطمینان دارید؟')) return;
+
+                const messageId = btn.getAttribute('data-id');
+
+                try {
+                    const response = await fetch(`/admin/contacts/${messageId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        }
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert(result.message);
+                        btn.closest('tr').remove(); // Remove from table
+                    } else {
+                        alert('خطا در حذف پیام');
+                    }
+                } catch (error) {
+                    console.error('Error deleting message:', error);
+                    alert('خطا در حذف پیام');
+                }
+            });
+        });
+
+        // Reply message button
+        document.querySelectorAll('.reply-message').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const messageId = btn.getAttribute('data-id');
+
+                try {
+                    const response = await fetch(`/admin/contacts/${messageId}`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const contact = await response.json();
+
+                    // Populate modal with message data
+                    document.getElementById('modal-name').textContent = contact.name;
+                    document.getElementById('modal-email').textContent = contact.email;
+                    document.getElementById('modal-subject').textContent = contact.subject;
+                    document.getElementById('modal-message').textContent = contact.message;
+
+                    // Always show response form for reply action
+                    messageResponse.style.display = 'none';
+                    responseForm.style.display = 'block';
+                    responseForm.querySelector('textarea').value = '';
+                    responseForm.querySelector('textarea').focus();
+
+                    // Set current message ID
+                    currentMessageId = messageId;
+
+                    // Show modal
+                    modal.style.display = 'block';
+
+                } catch (error) {
+                    console.error('Error fetching message for reply:', error);
+                    alert('خطا در دریافت اطلاعات پیام');
+                }
+            });
+        });
     </script>
+
 </body>
 
 </html>
