@@ -9,9 +9,9 @@
 <!-- Hero Section -->
 <section class="hero" id="home">
     <div class="hero-content">
-        <h1>سرورهای <span>VPS</span> پرسرعت با uptime 99.9%</h1>
-        <p>با سرویس های ابری ما، وبسایت خود را با بالاترین سرعت و امنیت میزبانی کنید. پشتیبانی 24/7 و گارانتی بازگشت
-            وجه در 30 روز</p>
+        <h1>سرورهای <span>VPS</span> پرسرعت با uptime ۹۹.۹%</h1>
+        <p>با سرویس های ابری ما، وبسایت خود را با بالاترین سرعت و امنیت میزبانی کنید. پشتیبانی ۲۴/۷ و گارانتی بازگشت
+            وجه در ۳۰ روز</p>
         <div class="hero-btns">
             <a href="#" class="btn btn-primary">شروع کنید</a>
             <a href="#" class="btn btn-outline">بیشتر بدانید</a>
@@ -51,8 +51,8 @@
             <div class="feature-icon">
                 <i class="fas fa-headset"></i>
             </div>
-            <h3>پشتیبانی 24/7</h3>
-            <p>تیم پشتیبانی ما به صورت 24 ساعته و 7 روز هفته آماده پاسخگویی به سوالات و حل مشکلات شما هستند</p>
+            <h3>پشتیبانی ۲۴/۷</h3>
+            <p>تیم پشتیبانی ما به صورت ۲۴ ساعته و ۷ روز هفته آماده پاسخگویی به سوالات و حل مشکلات شما هستند</p>
         </div>
     </div>
 </section>
@@ -68,14 +68,14 @@
         <div class="pricing-card lazy-load">
             <div class="pricing-header">
                 <h3 class="pricing-name">پلن پایه</h3>
-                <div class="price">59,000 <span>تومان/ماه</span></div>
+                <div class="price">۵۹.۰۰۰ <span>تومان/ماه</span></div>
             </div>
             <ul class="pricing-features">
-                <li><i class="fas fa-check"></i> 1 هسته پردازنده</li>
-                <li><i class="fas fa-check"></i> 2 گیگابایت رم</li>
-                <li><i class="fas fa-check"></i> 40 گیگابایت فضای SSD</li>
+                <li><i class="fas fa-check"></i> ۱ هسته پردازنده</li>
+                <li><i class="fas fa-check"></i> ۲ گیگابایت رم</li>
+                <li><i class="fas fa-check"></i> ۴۰ گیگابایت فضای SSD</li>
                 <li><i class="fas fa-check"></i> ترافیک نامحدود</li>
-                <li><i class="fas fa-check"></i> پشتیبانی 24/7</li>
+                <li><i class="fas fa-check"></i> پشتیبانی ۲۴/۷</li>
             </ul>
             <a href="#" class="btn btn-primary">خرید پلن</a>
         </div>
@@ -83,14 +83,14 @@
         <div class="pricing-card popular lazy-load">
             <div class="pricing-header">
                 <h3 class="pricing-name">پلن حرفه ای</h3>
-                <div class="price">119,000 <span>تومان/ماه</span></div>
+                <div class="price">۱۱۹.۰۰۰ <span>تومان/ماه</span></div>
             </div>
             <ul class="pricing-features">
-                <li><i class="fas fa-check"></i> 2 هسته پردازنده</li>
-                <li><i class="fas fa-check"></i> 4 گیگابایت رم</li>
-                <li><i class="fas fa-check"></i> 80 گیگابایت فضای SSD</li>
+                <li><i class="fas fa-check"></i> ۲ هسته پردازنده</li>
+                <li><i class="fas fa-check"></i> ۴ گیگابایت رم</li>
+                <li><i class="fas fa-check"></i> ۸۰ گیگابایت فضای SSD</li>
                 <li><i class="fas fa-check"></i> ترافیک نامحدود</li>
-                <li><i class="fas fa-check"></i> پشتیبانی 24/7</li>
+                <li><i class="fas fa-check"></i> پشتیبانی ۲۴/۷</li>
             </ul>
             <a href="#" class="btn btn-primary">خرید پلن</a>
         </div>
@@ -98,14 +98,14 @@
         <div class="pricing-card lazy-load">
             <div class="pricing-header">
                 <h3 class="pricing-name">پلن enterprise</h3>
-                <div class="price">229,000 <span>تومان/ماه</span></div>
+                <div class="price">۲۲۹.۰۰۰ <span>تومان/ماه</span></div>
             </div>
             <ul class="pricing-features">
-                <li><i class="fas fa-check"></i> 4 هسته پردازنده</li>
-                <li><i class="fas fa-check"></i> 8 گیگابایت رم</li>
-                <li><i class="fas fa-check"></i> 160 گیگابایت فضای SSD</li>
+                <li><i class="fas fa-check"></i> ۴ هسته پردازنده</li>
+                <li><i class="fas fa-check"></i> ۸ گیگابایت رم</li>
+                <li><i class="fas fa-check"></i> ۱۶۰ گیگابایت فضای SSD</li>
                 <li><i class="fas fa-check"></i> ترافیک نامحدود</li>
-                <li><i class="fas fa-check"></i> پشتیبانی 24/7</li>
+                <li><i class="fas fa-check"></i> پشتیبانی ۲۴/۷</li>
             </ul>
             <a href="#" class="btn btn-primary">خرید پلن</a>
         </div>
@@ -121,7 +121,7 @@
 
     <div class="testimonials-grid">
         <div class="testimonial-card lazy-load">
-            <p class="testimonial-text">"از زمانی که به سرویس VPS این شرکت کوچ کردم، سرعت وبسایت من 3 برابر شده است.
+            <p class="testimonial-text">"از زمانی که به سرویس VPS این شرکت کوچ کردم، سرعت وبسایت من ۳ برابر شده است.
                 پشتیبانی فوق العاده پاسخگو و حرفه ای دارند."</p>
             <div class="testimonial-author">
                 <div class="author-avatar">م.ر</div>
@@ -133,8 +133,8 @@
         </div>
 
         <div class="testimonial-card lazy-load">
-            <p class="testimonial-text">"تیم پشتیبانی 24 ساعته واقعاً به درد من خورد. یکبار نصف شب مشکل پیش اومد و
-                در کمتر از 15 دقیقه مشکل رو برطرف کردند."</p>
+            <p class="testimonial-text">"تیم پشتیبانی ۲۴ ساعته واقعاً به درد من خورد. یکبار نصف شب مشکل پیش اومد و
+                در کمتر از ۱۵ دقیقه مشکل رو برطرف کردند."</p>
             <div class="testimonial-author">
                 <div class="author-avatar">ف.ن</div>
                 <div class="author-details">

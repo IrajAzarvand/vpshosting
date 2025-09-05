@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="@yield('description', 'ارائه دهنده سرویس های VPS و هاستینگ حرفه ای با پشتیبانی 24/7 - میزبانی ابری با uptime 99.9%')">
+        content="@yield('description', 'ارائه دهنده سرویس های VPS و هاستینگ حرفه ای با پشتیبانی ۲۴/۷ - میزبانی ابری با uptime ۹۹.۹%')">
     <title>@yield('title', 'سرویس های VPS حرفه ای - میزبانی ابری با عملکرد بالا')</title>
 
     <!-- External CSS -->
@@ -31,7 +31,7 @@
                     <li><a href="{{ route('home') }}#features">امکانات</a></li>
                     <li><a href="{{ route('home') }}#pricing">تعرفه ها</a></li>
                     <li><a href="{{ route('home') }}#testimonials">نظرات</a></li>
-                    <li><a href="{{ route('home') }}#contact">تماس با ما</a></li>
+                    <li><a href="{{ route('contact') }}">تماس با ما</a></li>
                 </ul>
             </nav>
 
@@ -60,7 +60,7 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <h3>درباره ما</h3>
-                <p>ما با بیش از 10 سال تجربه در زمینه میزبانی وب و سرویس های ابری، به هزاران مشتری در سراسر ایران خدمات
+                <p>ما با بیش از ۱۰ سال تجربه در زمینه میزبانی وب و سرویس های ابری، به هزاران مشتری در سراسر ایران خدمات
                     ارائه داده ایم.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fab fa-telegram"></i></a>
@@ -77,7 +77,7 @@
                     <li><a href="{{ route('home') }}#features">امکانات</a></li>
                     <li><a href="{{ route('home') }}#pricing">تعرفه ها</a></li>
                     <li><a href="{{ route('home') }}#testimonials">نظرات</a></li>
-                    <li><a href="{{ route('home') }}#contact">تماس با ما</a></li>
+                    <li><a href="{{ route('contact') }}">تماس با ما</a></li>
                 </ul>
             </div>
 
